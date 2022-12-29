@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="<%- config.language %>">
+  <%- partial('_partial/scripts/_ctrl') _%>
+  <%- partial('_partial/head') _%>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <!-- import body_begin begin-->
+    <%_ if (config.import && config.import.body_begin){ _%>
+      <%_ ([...config.import.body_begin]).forEach(function(item){ _%>
+        <%- item %>
+      <%_ }) _%>
+    <%_ } _%>
+    <!-- import body_begin end-->
+    <!-- Custom Files bodyBegin begin-->
+    <%- volantis_inject('bodyBegin') %>
+    <!-- Custom Files bodyBegin end-->
+    <%- partial('_partial/header', null, {cache: false, path: path}) %>
+    <div id="l_body">
+      <%- partial('_partial/cover') %>
+      <div id="safearea">
+        <div class="body-wrapper">
+          <%- body %>
+          <%- partial('_plugins/pjax/pdata') %>
+        </div>
+        <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
+        <a id="s-top" class="fa-solid fa-arrow-up fa-fw" href="/" onclick="return false;" title="top"></a>
+      </div>
+    </div>
+    <div>
+      <%- partial('_partial/scripts/index') %>
+      <% if (theme.plugins.pjax.enable){ %>
+        <%- partial('_plugins/pjax/index') %>
+      <% } %>
+    </div>
+    <!-- import body_end begin-->
+    <%_ if (config.import && config.import.body_end){ _%>
+      <%_ ([...config.import.body_end]).forEach(function(item){ _%>
+        <%- item %>
+      <%_ }) _%>
+    <%_ } _%>
+    <!-- import body_end end-->
+    <!-- Custom Files bodyEnd begin-->
+    <%- volantis_inject('bodyEnd') %>
+    <!-- Custom Files bodyEnd end-->
+    <script src="/js/mouse/sakura.js"></script>
+    <script src="/js/mouse/mouseslide.js"></script>
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+    <script src="/js/mouse/eplanime.js"></script> 
+    <script src="/js/mouse/explosion.js"></script> 
+    <link rel="stylesheet" href="/js/mouse/rand.css"><script src="/js/mouse/randcss.js"></script>
+    <script>localStorage.setItem('modelId', '1');localStorage.setItem('modelTexturesId', '1');</script>
+    <script src="/js/waifu.js"></script>
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">$(document).ready(function(){var OriginTitile = document.title; var titleTime;document.addEventListener('visibilitychange', function(){
+                if (document.hidden){
+                    document.title = '歪，你去哪里了？';
+                    clearTimeout(titleTime);
+                }else{
+                    document.title = '(つェ⊂)咦，又回来了!';
+                    titleTime = setTimeout(function() {
+                        document.title = OriginTitile;
+                    }, 3000); // 3秒后恢复原标题  
+                }
+            });});</script><script>$(document).on('pjax:complete',function(){if(!$('.post-content').length){ $('.qrcode').css('display', 'none')}else{ $('.qrcode').css('display', 'block')};Hitokoto();});</script>
+
+  </body>
+</html>
